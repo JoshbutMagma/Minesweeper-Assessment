@@ -26,9 +26,7 @@ public class Game
         }
         for (int i=0; i<8; i++){
             for (int j=0; j<10; j++){
-                /**if(!j==9){
-                     System.out.print(board[j][i] + " ");
-                }*/
+                System.out.print(board[j][i] + " ");
             }
             System.out.println();
         }
@@ -44,9 +42,7 @@ public class Game
             board[xTest][yTest] = " ";
             for (int i=0; i<8; i++){
                 for (int j=0; j<10; j++){
-                    /**if(!j==9){
-                        System.out.print(board[j][i] + " ");
-                    }*/
+                    System.out.print(board[j][i] + " ");
                 }
                 System.out.println();
             }

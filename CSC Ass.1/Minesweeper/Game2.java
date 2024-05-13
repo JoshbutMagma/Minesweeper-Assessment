@@ -1,23 +1,24 @@
 
 /**
- * Play a game of Minesweeper
+ * An alternate imput method trial to Game
  *
  * Joshua Hunter
- * 06/05-
+ * 14/05
  */
 import java.util.Scanner;
 import java.util.Random;
-public class Game
+public class Game2
 {
     public static void main(String args[])
     {
         //innitializing variables, scanner, and board
         Scanner keyboard = new Scanner(System.in);
         String[][] board = new String[10][8];
+        String coords;
         int xTest;
         int yTest;
         boolean gameRunning = true;
-
+        
         //Creating and printing the innitial board
         for (int i=0; i<8; i++){
             for (int j=0; j<10; j++){
@@ -39,16 +40,12 @@ public class Game
             }
             System.out.println();
         }
-
+        
         while (gameRunning){
-            System.out.println("Please enter the column you would like to test");
-            xTest = (keyboard.nextInt()-1);
-            if (xTest==-1){
-                gameRunning = false;
-            }
-            System.out.println("Please enter the row you would like to test");
-            yTest = (keyboard.nextInt()-1);
-            board[xTest][yTest] = " ";
+            System.out.println("Where would you like to guess? format your answer in Column,Row.");
+            coords = keyboard.nextLine();
+            
+            //board[xTest][yTest] = " ";
             for (int i=0; i<8; i++){
                 for (int j=0; j<10; j++){
                     System.out.print(board[j][i] + " ");

@@ -39,6 +39,7 @@ public class Game
         int xTest;
         int yTest;
         int safeTilesLeft;
+        String method;
         boolean gameRunning = true;
         
         //Creating the initial board
@@ -65,15 +66,27 @@ public class Game
         //Playing the game
         while (gameRunning){
             //Inputting tiles
+            System.out.println("Please enter the method you'd like to test with. Type T to test the tile, and F to flag the tile");
+            method = keyboard.nextLine();
+            method = method.toUpperCase();
             System.out.println("Please enter the column you would like to test");
             xTest = keyboard.nextInt();
             System.out.println("Please enter the row you would like to test");
             yTest = keyboard.nextInt();
-            //Reveal the corresponding square that was entered
-            board[xTest][yTest] = underBoard[xTest][yTest];
             
-            //Printing the new board
-            print(board);
+            //Reveal the corresponding square that was entered, and print the new board
+            if(method=="T"&&board[xTest][yTest]!="F"){
+                board[xTest][yTest] = underBoard[xTest][yTest];
+                print(board);
+            }else if(method=="F"&&board[xTest][yTest]!="F"){
+                board[xTest][yTest] = "F";
+                print(board);
+            }else if(method=="F"&&board[xTest][yTest]=="F"){
+                board[xTest][yTest] = "X";
+                print(board);
+            }else{
+                System.out.println("Bad input, try again");
+            }
             
             //Was that turn Game Over?
             if(board[xTest][yTest]=="B"){

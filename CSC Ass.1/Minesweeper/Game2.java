@@ -44,9 +44,10 @@ public class Game2
         while (gameRunning){
             System.out.println("Where would you like to guess? format your answer in Column/Row.");
             coords = keyboard.nextLine();
-            /**xTest = Integer.parseInt(coords.charAt(0));
-            yTest = Integer.parseInt(coords.charAt(2));
-            board[xTest][yTest] = " ";*/
+            xTest = coords.charAt(0);
+            yTest = coords.charAt(2);
+            System.out.println(xTest + yTest);
+            //board[xTest][yTest] = " ";
             
             //Printing the new board
             System.out.print("  ");

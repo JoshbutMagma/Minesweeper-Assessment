@@ -74,14 +74,15 @@ public class Game
             System.out.println("Please enter the row you would like to test");
             yTest = keyboard.nextInt();
             
+            System.out.println(method);
             //Reveal the corresponding square that was entered, and print the new board
-            if(method=="T"&&board[xTest][yTest]!="F"){
+            if(method.equals("T")&&board[xTest][yTest]!="F"){
                 board[xTest][yTest] = underBoard[xTest][yTest];
                 print(board);
-            }else if(method=="F"&&board[xTest][yTest]!="F"){
+            }else if(method.equals("F")&&board[xTest][yTest].equals("F")){
                 board[xTest][yTest] = "F";
                 print(board);
-            }else if(method=="F"&&board[xTest][yTest]=="F"){
+            }else if(method.equals("F")&&board[xTest][yTest].equals("F")){
                 board[xTest][yTest] = "X";
                 print(board);
             }else{

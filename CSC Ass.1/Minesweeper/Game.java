@@ -35,13 +35,14 @@ public class Game
         //innitializing variables, scanner, and board
         Scanner keyboard = new Scanner(System.in);
         Random random = new Random();
-        String[][] board = new String[10][8];
-        String[][] underBoard = new String[10][8];
+        String[][] board = new String[11][9];
+        String[][] underBoard = new String[11][9];
         int bombsPlaced = 0;
         int bombX;
         int bombY;
         int xTest;
         int yTest;
+        int nearbyBombs = 0;
         int safeTilesLeft = 70;
         String method;
         boolean gameRunning = true;
@@ -64,6 +65,22 @@ public class Game
                 bombsPlaced++;
             }
         }
+        for (int i=1; i<9; i++){
+            for (int j=1; j<11; j++){
+                if (underBoard[j][i]!="B"){
+                    for (int k=0; k<3; k++){
+                        for (int l=0; l<3; l++){
+                            if (underBoard[(j+k-1)][(i+l-1)]=="B"){
+                                nearbyBombs++;
+                            }
+                        }
+                    }
+                    underBoard[j][i] = String.valueOf(nearbyBombs);
+                    nearbyBombs = 0;
+                }
+            }
+        }
+        print(underBoard);
         
         //Playing the game
         while (gameRunning){

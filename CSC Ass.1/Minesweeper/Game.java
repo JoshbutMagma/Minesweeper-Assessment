@@ -26,6 +26,10 @@ public class Game
             System.out.println();
         }
     }
+    /**static int number(String[][] underBoard)
+    {
+        
+    }*/
     public static void main(String[] args)
     {
         //innitializing variables, scanner, and board
@@ -38,7 +42,7 @@ public class Game
         int bombY;
         int xTest;
         int yTest;
-        int safeTilesLeft;
+        int safeTilesLeft = 70;
         String method;
         boolean gameRunning = true;
         
@@ -49,6 +53,7 @@ public class Game
                 underBoard[j][i] = " ";
             }
         }
+        print(board);
         
         //Randomly planting bombs
         while (bombsPlaced<10){
@@ -60,9 +65,6 @@ public class Game
             }
         }
         
-        //Printing the board
-        print(board);
-        
         //Playing the game
         while (gameRunning){
             //Inputting tiles
@@ -73,13 +75,14 @@ public class Game
             xTest = keyboard.nextInt();
             System.out.println("Please enter the row you would like to test");
             yTest = keyboard.nextInt();
-            
-            System.out.println(method);
+            keyboard.nextLine();
+
             //Reveal the corresponding square that was entered, and print the new board
-            if(method.equals("T")&&board[xTest][yTest]!="F"){
+            if(method.equals("T")&&!(board[xTest][yTest].equals("F"))){
                 board[xTest][yTest] = underBoard[xTest][yTest];
+                safeTilesLeft--;
                 print(board);
-            }else if(method.equals("F")&&board[xTest][yTest].equals("F")){
+            }else if(method.equals("F")&&!(board[xTest][yTest].equals("F"))){
                 board[xTest][yTest] = "F";
                 print(board);
             }else if(method.equals("F")&&board[xTest][yTest].equals("F")){
@@ -90,7 +93,7 @@ public class Game
             }
             
             //Was that turn Game Over?
-            if(board[xTest][yTest]=="B"){
+            if(board[xTest][yTest].equals("B")){
                 System.out.println("Game over");
                 gameRunning = false;
             }

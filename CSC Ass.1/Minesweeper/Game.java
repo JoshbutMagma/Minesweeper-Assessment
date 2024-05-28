@@ -16,40 +16,35 @@ public class Game
             System.out.print(i + " ");
         }
         System.out.println();
-        for (int i=0; i<8; i++){
-            for (int j=0; j<10; j++){
-                if(j==0){
-                    System.out.print(i + " ");
+        for (int i=1; i<9; i++){
+            for (int j=1; j<11; j++){
+                if(j==1){
+                    System.out.print((i-1) + " ");
                 }
                 System.out.print(board[j][i] + " ");
             }
             System.out.println();
         }
     }
-    /**static int number(String[][] underBoard)
-    {
-        
-    }*/
     public static void main(String[] args)
     {
         //innitializing variables, scanner, and board
         Scanner keyboard = new Scanner(System.in);
         Random random = new Random();
-        String[][] board = new String[11][9];
-        String[][] underBoard = new String[11][9];
+        String[][] board = new String[12][10];
+        String[][] underBoard = new String[12][10];
         int bombsPlaced = 0;
         int bombX;
         int bombY;
         int xTest;
         int yTest;
         int nearbyBombs = 0;
-        int safeTilesLeft = 70;
         String method;
         boolean gameRunning = true;
         
         //Creating the initial board
-        for (int i=0; i<8; i++){
-            for (int j=0; j<10; j++){
+        for (int i=1; i<9; i++){
+            for (int j=1; j<11; j++){
                 board[j][i] = "X";
                 underBoard[j][i] = " ";
             }
@@ -58,8 +53,8 @@ public class Game
         
         //Randomly planting bombs
         while (bombsPlaced<10){
-            bombX = random.nextInt(10);
-            bombY = random.nextInt(8);
+            bombX = random.nextInt(10)+1;
+            bombY = random.nextInt(8)+1;
             if(underBoard[bombX][bombY]!="B"){
                 underBoard[bombX][bombY] = "B";
                 bombsPlaced++;
@@ -80,7 +75,13 @@ public class Game
                 }
             }
         }
-        print(underBoard);
+        for (int i=1; i<9; i++){
+            for (int j=1; j<11; j++){
+                if (underBoard[j][i].equals("0")){
+                    underBoard[j][i] = " ";
+                }
+            }
+        }
         
         //Playing the game
         while (gameRunning){
@@ -89,15 +90,14 @@ public class Game
             method = keyboard.nextLine();
             method = method.toUpperCase();
             System.out.println("Please enter the column you would like to test");
-            xTest = keyboard.nextInt();
+            xTest = keyboard.nextInt()+1;
             System.out.println("Please enter the row you would like to test");
-            yTest = keyboard.nextInt();
+            yTest = keyboard.nextInt()+1;
             keyboard.nextLine();
 
             //Reveal the corresponding square that was entered, and print the new board
             if(method.equals("T")&&!(board[xTest][yTest].equals("F"))){
                 board[xTest][yTest] = underBoard[xTest][yTest];
-                safeTilesLeft--;
                 print(board);
             }else if(method.equals("F")&&!(board[xTest][yTest].equals("F"))){
                 board[xTest][yTest] = "F";

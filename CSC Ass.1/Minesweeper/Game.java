@@ -60,6 +60,7 @@ public class Game
                 bombsPlaced++;
             }
         }
+        //Fill the board with numbers
         for (int i=1; i<9; i++){
             for (int j=1; j<11; j++){
                 if (underBoard[j][i]!="B"){
@@ -98,16 +99,29 @@ public class Game
             //Reveal the corresponding square that was entered, and print the new board
             if(method.equals("T")&&!(board[xTest][yTest].equals("F"))){
                 board[xTest][yTest] = underBoard[xTest][yTest];
-                print(board);
             }else if(method.equals("F")&&!(board[xTest][yTest].equals("F"))){
                 board[xTest][yTest] = "F";
-                print(board);
             }else if(method.equals("F")&&board[xTest][yTest].equals("F")){
                 board[xTest][yTest] = "X";
-                print(board);
             }else{
                 System.out.println("Bad input, try again");
             }
+            for(int c=0; c<10; c++){
+                for (int i=1; i<9; i++){
+                    for (int j=1; j<11; j++){
+                        if (board[j][i]==" "){
+                            for (int k=0; k<3; k++){
+                                for (int l=0; l<3; l++){
+                                    if ((j+k-1)!=0&&(i+l-1)!=0){
+                                        board[(j+k-1)][(i+l-1)] = underBoard[(j+k-1)][(i+l-1)];
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            print(board);
             
             //Was that turn Game Over?
             if(board[xTest][yTest].equals("B")){

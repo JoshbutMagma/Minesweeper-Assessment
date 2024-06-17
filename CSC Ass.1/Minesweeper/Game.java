@@ -63,18 +63,18 @@ public class Game
         while (bombsPlaced<10){
             bombX = random.nextInt(10)+1;
             bombY = random.nextInt(8)+1;
-            if(underBoard[bombX][bombY]!="B"){
-                underBoard[bombX][bombY] = "B";
+            if(underBoard[bombX][bombY]!="💣"){
+                underBoard[bombX][bombY] = "💣";
                 bombsPlaced++;
             }
         }
         //Fill the board with numbers. j and i allow the program to repeat on every tile. Then, it checks if the cell is a bomb, and adds +1 to each nearby square.
         for (int i=1; i<9; i++){
             for (int j=1; j<11; j++){
-                if (underBoard[j][i]!="B"){
+                if (underBoard[j][i]!="💣"){
                     for (int k=0; k<3; k++){
                         for (int l=0; l<3; l++){
-                            if (underBoard[(j+k-1)][(i+l-1)]=="B"){
+                            if (underBoard[(j+k-1)][(i+l-1)]=="💣"){
                                 nearbyBombs++;
                             }
                         }
@@ -145,13 +145,13 @@ public class Game
                 }
             }
             
-            if(!board[xTest][yTest].equals("B")&&tilesLeft!=0){
+            if(!board[xTest][yTest].equals("💣")&&tilesLeft!=0){
                 print(board);
                 System.out.println("You've placed " + flagsPlaced + "/10 flags.");
             }
             
             //Was that turn Game Over?
-            if(board[xTest][yTest].equals("B")){
+            if(board[xTest][yTest].equals("💣")){
                 print(board);
                 System.out.println("Game over");
                 gameRunning = false;

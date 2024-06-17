@@ -31,14 +31,20 @@ public class Game
         //innitializing variables, scanner, and board
         Scanner keyboard = new Scanner(System.in);
         Random random = new Random();
+        /**
+         * Replace hard values with variables
+         */
         String[][] board = new String[12][10];
         String[][] underBoard = new String[12][10];
-        int bombsPlaced = 0;
         int bombX;
         int bombY;
         int xTest;
         int yTest;
+        int bombsPlaced = 0;
         int nearbyBombs = 0;
+        int flagsPlaced = 0;
+        int tilesLeft = 0;
+        int turn = 1;
         String method;
         boolean gameRunning = true;
         
@@ -52,7 +58,7 @@ public class Game
         print(board);
         
         //Randomly planting bombs
-        while (bombsPlaced<10){
+        while (bombsPlaced<5){
             bombX = random.nextInt(10)+1;
             bombY = random.nextInt(8)+1;
             if(underBoard[bombX][bombY]!="B"){
@@ -60,7 +66,7 @@ public class Game
                 bombsPlaced++;
             }
         }
-        //Fill the board with numbers
+        //Fill the board with numbers. j and i allow the program to repeat on every tile. Then, it checks if the cell is a bomb, and adds +1 to each nearby square.
         for (int i=1; i<9; i++){
             for (int j=1; j<11; j++){
                 if (underBoard[j][i]!="B"){
@@ -76,6 +82,7 @@ public class Game
                 }
             }
         }
+        //Replace every 0 with a " "
         for (int i=1; i<9; i++){
             for (int j=1; j<11; j++){
                 if (underBoard[j][i].equals("0")){
@@ -99,13 +106,17 @@ public class Game
             //Reveal the corresponding square that was entered, and print the new board
             if(method.equals("T")&&!(board[xTest][yTest].equals("F"))){
                 board[xTest][yTest] = underBoard[xTest][yTest];
-            }else if(method.equals("F")&&!(board[xTest][yTest].equals("F"))){
+            }else if(method.equals("F")&&(board[xTest][yTest].equals("X"))&&!(flagsPlaced==10)){
                 board[xTest][yTest] = "F";
+                flagsPlaced++;
             }else if(method.equals("F")&&board[xTest][yTest].equals("F")){
                 board[xTest][yTest] = "X";
+                flagsPlaced--;
             }else{
                 System.out.println("Bad input, try again");
             }
+            
+            //Clears tiles automatically. c repeats the program so that the board is fully able to clear from the bottom right corner to the top left if needed. j and i check every tile. The program then checks if a tile is blank, and clears any tile in an area around the blank.
             for(int c=0; c<10; c++){
                 for (int i=1; i<9; i++){
                     for (int j=1; j<11; j++){
@@ -121,13 +132,34 @@ public class Game
                     }
                 }
             }
-            print(board);
+            
+            //Checks if any tile is still covered up, and stores that to determine if the game is won.
+            for(int i=1; i<9; i++){
+                for(int j=1; j<11; j++){
+                    if(board[j][i]=="X"){
+                        tilesLeft++;
+                    }
+                }
+            }
+            
+            if(!board[xTest][yTest].equals("B")&&tilesLeft!=0){
+                print(board);
+                System.out.println("You've placed " + flagsPlaced + "/10 flags.");
+            }
             
             //Was that turn Game Over?
             if(board[xTest][yTest].equals("B")){
+                print(underBoard);
                 System.out.println("Game over");
                 gameRunning = false;
             }
+            if(tilesLeft==0){
+                print(board);
+                System.out.println("You win! Congratulations! You won in " + turn + " turns.");
+                gameRunning = false;
+            }
+            turn++;
+            tilesLeft = 0;
         }
     }
 }

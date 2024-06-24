@@ -41,6 +41,7 @@ public class Game
         /**
          * Replace hard values with variables
          * Try formatting the numbers on the board better (not starting at 0, using letters, etc)
+         * Fix bug where ending the game on a bomb counts as victory
          */
         //innitializing variables, scanner, and board
         System.out.print('\u000c');
@@ -48,6 +49,7 @@ public class Game
         Random random = new Random();
         String[][] board = new String[12][10];
         String[][] underBoard = new String[12][10];
+        int bombs = 5;
         int bombX;
         int bombY;
         int num = 0;
@@ -71,7 +73,7 @@ public class Game
         print(board);
         
         //Randomly planting bombs
-        while (bombsPlaced<10){
+        while (bombsPlaced<bombs){
             bombX = random.nextInt(10)+1;
             bombY = random.nextInt(8)+1;
             if(underBoard[bombX][bombY]!="💣"){
@@ -105,7 +107,7 @@ public class Game
         }
         
         //Playing the game
-        System.out.println("You've placed 0/10 flags.");
+        System.out.println("You've placed 0/" + bombs + " flags.");
         while (gameRunning){
             //Inputting tiles
             System.out.println("Please enter the method you'd like to test with. Type T to test the tile, and F to flag the tile");
@@ -118,11 +120,11 @@ public class Game
             System.out.print('\u000c');
             
             //This "if" bracket around everything prevents invalid integers crashing the game
-            if(xTest<10&&xTest>-1&&yTest<8&&yTest>-1){
+            if(xTest<11&&xTest>-1&&yTest<9&&yTest>-1){
                 //Reveal the corresponding square that was entered, and print the new board
                 if(method.equals("T")&&!(board[xTest][yTest].equals("⚑"))){
                     board[xTest][yTest] = underBoard[xTest][yTest];
-                }else if(method.equals("F")&&(board[xTest][yTest].equals("■"))&&!(flagsPlaced==10)){
+                }else if(method.equals("F")&&(board[xTest][yTest].equals("■"))&&!(flagsPlaced==bombs)){
                     board[xTest][yTest] = "⚑";
                     flagsPlaced++;
                 }else if(method.equals("F")&&board[xTest][yTest].equals("⚑")){
@@ -133,7 +135,7 @@ public class Game
                 }
                 
                 //Clears tiles automatically. c repeats the program so that the board is fully able to clear from the bottom right corner to the top left if needed. j and i check every tile. The program then checks if a tile is blank, and reveals any tile in an area around the blank.
-                for(int c=0; c<10; c++){
+                for(int c=0; c<15; c++){
                     for (int i=1; i<9; i++){
                         for (int j=1; j<11; j++){
                             if (board[j][i]=="·"){
@@ -160,7 +162,7 @@ public class Game
                 
                 if(!board[xTest][yTest].equals("💣")&&tilesLeft!=0){
                     print(board);
-                    System.out.println("You've placed " + flagsPlaced + "/10 flags.");
+                    System.out.println("You've placed " + flagsPlaced + "/" + bombs + " flags.");
                 }
                 
                 //Was that turn Game Over?
@@ -179,7 +181,7 @@ public class Game
             }else{
                 System.out.println("Bad input, try again");
                 print(board);
-                System.out.println("You've placed " + flagsPlaced + "/10 flags.");
+                System.out.println("You've placed " + flagsPlaced + "/" + bombs + " flags.");
             }
         }
     }

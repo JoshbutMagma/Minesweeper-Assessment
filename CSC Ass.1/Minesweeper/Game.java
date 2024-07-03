@@ -4,10 +4,10 @@
  * By default, it uses Google Minesweeper easy settings (10/8 board, 10 bombs), however it's easily changeable in the code by replacing the values for "bombs", "X", and "Y"
  *
  * Joshua Hunter
- * 06/05
+ * 06/05-
  * 
  * Suggestions:
- * Try formatting the numbers on the board better (not starting at 0, using letters, etc)
+ * 
  */
 import java.util.Scanner;
 import java.util.Random;
@@ -20,27 +20,55 @@ public class Game
     static void print(String[][] board, int X, int Y)
     {
         //This loop, and the similar one below, prints numbers at the top of the screen for reference when inputting a tile
+        //There are several ifs that lead to printing spaces, this is so that the board can format properly if asked to make boards with larger sizes
         System.out.print("  ");
-        for (int i=0; i<X; i++){
-            System.out.print(i + " ");
+        if(X>10){
+            System.out.print(" ");
+        }
+        for (int i=1; i<X+1; i++){
+            System.out.print(i);
+            if(i<10){
+                System.out.print(" ");
+            }
+            if(X>10){
+                System.out.print(" ");
+            }
         }
         System.out.println();
         for (int i=1; i<(Y+1); i++){
             for (int j=1; j<(X+1); j++){
                 //This loop, and the similar one below, prints the numbers on the side for reference when inputting a tile
                 if(j==1){
-                    System.out.print((i-1) + " ");
+                    System.out.print(i);
+                    if(i<10){
+                        System.out.print(" ");
+                    }
+                    if(X>10){
+                        System.out.print(" ");
+                    }
                 }
                 System.out.print(board[j][i] + " ");
+                if(Y>10){
+                    System.out.print(" ");
+                }
                 if(j==X){
-                    System.out.print(i-1);
+                    System.out.print(i);
                 }
             }
             System.out.println();
         }
         System.out.print("  ");
-        for (int i=0; i<X; i++){
-            System.out.print(i + " ");
+        if(X>10){
+            System.out.print(" ");
+        }
+        for (int i=1; i<X+1; i++){
+            System.out.print(i);
+            if(i<10){
+                System.out.print(" ");
+            }
+            if(X>10){
+                System.out.print(" ");
+            }
         }
         System.out.println();
     }
@@ -99,7 +127,8 @@ public class Game
         while (bombsPlaced<bombs){
             bombX = random.nextInt(X)+1;
             bombY = random.nextInt(Y)+1;
-            if(underBoard[bombX][bombY]!="💣"){//This checks for if a bomb is already in a tile, so that we do have exactly X bombs instead of doubling up
+            //This checks for if a bomb is already in a tile, so that we do have exactly X bombs instead of doubling up
+            if(underBoard[bombX][bombY]!="💣"){
                 underBoard[bombX][bombY] = "💣";
                 bombsPlaced++;
             }
@@ -108,7 +137,7 @@ public class Game
         for (int i=1; i<(Y+1); i++){
             for (int j=1; j<(X+1); j++){
                 if (underBoard[j][i]!="💣"){
-                    //Then, it checks each nearby cell for if it's a bob, and adds +1 to itself
+                    //Then, it checks each nearby cell for if it's a bomb, and adds +1 to itself
                     for (int k=0; k<3; k++){
                         for (int l=0; l<3; l++){
                             if (underBoard[(j+k-1)][(i+l-1)]=="💣"){
@@ -121,7 +150,7 @@ public class Game
                 }
             }
         }
-        //Replace every 0 with a "·"
+        //Replace every 0 with a dot
         for (int i=1; i<(Y+1); i++){
             for (int j=1; j<(X+1); j++){
                 if (underBoard[j][i].equals("0")){
@@ -138,9 +167,9 @@ public class Game
             method = keyboard.nextLine();
             method = method.toUpperCase();
             System.out.println("Please enter the column you would like to test");
-            xTest = input(num)+1;
+            xTest = input(num);
             System.out.println("Please enter the row you would like to test");
-            yTest = input(num)+1;
+            yTest = input(num);
             System.out.print('\u000c');
             
             //This if bracket around everything prevents invalid integers crashing the game
@@ -203,7 +232,7 @@ public class Game
                 turn++;
                 tilesLeft = 0;
             }else{
-                //If the input doesn't work, 
+                //If the input doesn't work, this is what happens
                 System.out.println("Bad input, try again");
                 print(board,X,Y);
                 System.out.println("You've placed " + flagsPlaced + "/" + bombs + " flags.");

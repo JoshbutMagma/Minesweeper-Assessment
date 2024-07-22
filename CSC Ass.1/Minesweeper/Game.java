@@ -4,7 +4,7 @@
  * By default, it uses Google Minesweeper easy settings (10/8 board, 10 bombs), however it's easily changeable in the code by replacing the values for "bombs", "X", and "Y"
  *
  * Joshua Hunter
- * 06/05-
+ * 06/05/24 - 22/07/24
  * 
  * Suggestions:
  * 
@@ -14,7 +14,7 @@ import java.util.Random;
 public class Game
 {
     /**
-     * This method goes allows the board to print by looking at every tile and printing what it is
+     * This method allows the board to print by looking at every tile and printing what it is
      * The method intakes the current board state as a 2D string array, as well as the values of how large the board is as integers
      */
     static void print(String[][] board, int X, int Y)
@@ -43,12 +43,12 @@ public class Game
                     if(i<10){
                         System.out.print(" ");
                     }
-                    if(X>10){
+                    if(X>9){
                         System.out.print(" ");
                     }
                 }
                 System.out.print(board[j][i] + " ");
-                if(Y>10){
+                if(Y>9){
                     System.out.print(" ");
                 }
                 if(j==X){

@@ -2,7 +2,7 @@
 comment0.target=Game
 comment1.params=board\ X\ Y
 comment1.target=void\ print(java.lang.String[][],\ int,\ int)
-comment1.text=\r\n\ This\ method\ goes\ allows\ the\ board\ to\ print\ by\ looking\ at\ every\ tile\ and\ printing\ what\ it\ is\r\n\ The\ method\ intakes\ the\ current\ board\ state\ as\ a\ 2D\ string\ array,\ as\ well\ as\ the\ values\ of\ how\ large\ the\ board\ is\ as\ integers\r\n
+comment1.text=\r\n\ This\ method\ allows\ the\ board\ to\ print\ by\ looking\ at\ every\ tile\ and\ printing\ what\ it\ is\r\n\ The\ method\ intakes\ the\ current\ board\ state\ as\ a\ 2D\ string\ array,\ as\ well\ as\ the\ values\ of\ how\ large\ the\ board\ is\ as\ integers\r\n
 comment2.params=xTest
 comment2.target=int\ input(int)
 comment2.text=\r\n\ This\ method\ determines\ whether\ or\ not\ an\ input\ is\ an\ integer,\ or\ if\ it\ isn't\ and\ needs\ to\ be\ re-inputted\r\n\ The\ method\ intakes\ an\ integer\ to\ use\ for\ testing\r\n\ The\ method\ returns\ the\ valid\ integer\r\n

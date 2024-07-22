@@ -22,15 +22,15 @@ public class Game
         //This loop, and the similar one below, prints numbers at the top of the screen for reference when inputting a tile
         //There are several ifs that lead to printing spaces, this is so that the board can format properly if asked to make boards with larger sizes
         System.out.print("  ");
-        if(X>10){
+        if(Y>9){
             System.out.print(" ");
         }
         for (int i=1; i<X+1; i++){
             System.out.print(i);
             if(i<10){
-                System.out.print(" ");
+                    System.out.print(" ");
             }
-            if(X>10){
+            if(X>9){
                 System.out.print(" ");
             }
         }
@@ -43,12 +43,12 @@ public class Game
                     if(i<10){
                         System.out.print(" ");
                     }
-                    if(X>9){
+                    if(Y>9){
                         System.out.print(" ");
                     }
                 }
                 System.out.print(board[j][i] + " ");
-                if(Y>9){
+                if(X>9&&!(j==X)){
                     System.out.print(" ");
                 }
                 if(j==X){
@@ -58,15 +58,15 @@ public class Game
             System.out.println();
         }
         System.out.print("  ");
-        if(X>10){
+        if(Y>9){
             System.out.print(" ");
         }
         for (int i=1; i<X+1; i++){
             System.out.print(i);
             if(i<10){
-                System.out.print(" ");
+                    System.out.print(" ");
             }
-            if(X>10){
+            if(X>9){
                 System.out.print(" ");
             }
         }

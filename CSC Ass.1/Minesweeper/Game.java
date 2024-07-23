@@ -4,7 +4,7 @@
  * By default, it uses Google Minesweeper easy settings (10/8 board, 10 bombs), however it's easily changeable in the code by replacing the values for "bombs", "X", and "Y"
  *
  * Joshua Hunter
- * 06/05/24 - 22/07/24
+ * 06/05/24 - 23/07/24
  * 
  * Suggestions:
  * 
@@ -28,7 +28,7 @@ public class Game
         for (int i=1; i<X+1; i++){
             System.out.print(i);
             if(i<10){
-                    System.out.print(" ");
+                System.out.print(" ");
             }
             if(X>9){
                 System.out.print(" ");
@@ -173,7 +173,7 @@ public class Game
             System.out.print('\u000c');
             
             //This if bracket around everything prevents invalid integers crashing the game
-            if(method.equals("T")||method.equals("F")&&xTest<(X+1)&&xTest>-1&&yTest<(Y+1)&&yTest>-1){
+            if((method.equals("T")||method.equals("F"))&&xTest<(X+1)&&xTest>0&&yTest<(Y+1)&&yTest>0){
                 //Reveal the corresponding square that was entered, and print the new board
                 if(method.equals("T")&&!(board[xTest][yTest].equals("⚑"))){
                     board[xTest][yTest] = underBoard[xTest][yTest];
